@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aurora Brew House - Specialty Café in Indiranagar, Bangalore. Where every cup tells a story. Specialty coffee, espresso, cold brew, and manual brew.">
+    <title>Aurora Brew House | Specialty Café, Indiranagar</title>
+    
+    <!-- Google Fonts Preconnect and Preload (Fix 3) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Link External Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. Sticky Navigation Bar -->
+    <header class="navbar-header" id="navbar">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-text">Aurora</span>
+                <span class="logo-sub">Brew House</span>
+            </a>
+            
+            <!-- Desktop Menu Links -->
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#menu" class="nav-link">Menu</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#contact" class="nav-link">Location</a></li>
+            </ul>
+
+            <!-- Mobile Menu Toggle Button (Hamburger) -->
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- 2. Hero Section with SVG Mug Scroll-To-Fill Animation -->
+    <section id="hero" class="hero-section">
+        <!-- Video Optimization (Fix 1): Autoplaying WebM (first) and MP4 fallback, with static poster still frame -->
+        <video autoplay loop muted playsinline poster="images/hero-poster.jpg" class="hero-bg-video" id="hero-bg">
+            <source src="images/hero-bg.webm" type="video/webm">
+            <source src="images/hero-bg.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="container hero-container">
+            <div class="hero-grid">
+                <!-- Left Column: Branding Details & Call-To-Action -->
+                <div class="hero-content">
+                    <h1 class="hero-title">Aurora Brew House</h1>
+                    <p class="hero-tagline">Where Every Cup Tells a Story.</p>
+                    <div class="hero-divider"></div>
+                    <a href="#menu" class="btn btn-primary hero-btn">View Menu</a>
+                </div>
+                
+                <!-- Right Column: Interactive Coffee Mug SVG -->
+                <div class="hero-illustration">
+                    <div class="mug-svg-wrapper">
+                        <svg viewBox="0 0 200 200" id="coffee-mug-svg" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <clipPath id="coffee-liquid-clip">
+                                    <!-- A trapezoidal clip matching the inside area of the mug -->
+                                    <path d="M 62,72 L 138,72 L 130,148 L 70,148 Z" />
+                                </clipPath>
+                            </defs>
+                            
+                            <!-- Steam lines that rise when coffee fills past 90% -->
+                            <g class="steam-group" style="opacity: 0; transition: opacity 0.4s ease;">
+                                <path class="steam-line steam-1" d="M 90,52 C 88,42 96,37 94,27" fill="none" stroke="#F7F3ED" stroke-width="2.5" stroke-linecap="round" />
+                                <path class="steam-line steam-2" d="M 100,52 C 102,39 98,35 100,22" fill="none" stroke="#F7F3ED" stroke-width="2.5" stroke-linecap="round" />
+                                <path class="steam-line steam-3" d="M 110,52 C 108,42 116,37 114,27" fill="none" stroke="#F7F3ED" stroke-width="2.5" stroke-linecap="round" />
+                            </g>
+
+                            <!-- Mug Handle -->
+                            <path d="M 138,85 C 168,85 168,135 138,135" fill="none" stroke="var(--golden-amber)" stroke-width="8" stroke-linecap="round" />
+                            
+                            <!-- Coffee Liquid (Animate height from 0 to 76 and y from 148 to 72) -->
+                            <rect id="coffee-liquid" x="50" y="148" width="100" height="0" fill="#5C4033" clip-path="url(#coffee-liquid-clip)" />
+                            
+                            <!-- Inner Rim depth details -->
+                            <ellipse cx="100" cy="72" rx="38" ry="10" fill="rgba(247, 243, 237, 0.08)" stroke="var(--cream)" stroke-width="4" />
+                            
+                            <!-- Mug Body Outline -->
+                            <path d="M 62,72 C 62,72 62,143 70,148 C 76,152 124,152 130,148 C 138,143 138,72 138,72" fill="rgba(247, 243, 237, 0.03)" stroke="var(--cream)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+                            
+                            <!-- Sleek visual shine highlight on left face of the mug -->
+                            <path d="M 75,90 L 75,130" fill="none" stroke="rgba(247, 243, 237, 0.15)" stroke-width="3" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Elegant scroll indicator -->
+        <a href="#about" class="scroll-indicator" aria-label="Scroll to About Section">
+            <span class="mouse">
+                <span class="wheel"></span>
+            </span>
+            <span class="arrow"></span>
+        </a>
+    </section>
+    <main>
+        <!-- 3. About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-content" data-reveal>
+                        <span class="section-subtitle">Our Story</span>
+                        <h2 class="section-title">Crafting Moments, One Roast at a Time</h2>
+                        <p class="about-text">
+                            Nestled in the heart of Indiranagar, Aurora Brew House is more than just a coffee shop. We are a sanctuary for coffee purists and casual drinkers alike, sourcing the finest single-origin beans from the lush estates of Chikmagalur.
+                        </p>
+                        <p class="about-text">
+                            Every batch is roasted with precision to unlock its distinct flavor profile. We believe that coffee brewing is an art form, and our passionate baristas pour their heart into every cup to deliver a truly memorable experience.
+                        </p>
+                        <p class="quote-text">
+                            "A sanctuary where craft meets comfort, and every bean has a tale to share."
+                        </p>
+                    </div>
+                    <div class="about-image-container" data-reveal>
+                        <div class="about-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=800&q=80" alt="Beautiful cozy interior of Aurora Brew House with brewing stations" class="about-image">
+                            <div class="about-image-border"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Divider -->
+        <div class="section-divider-wrap">
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- 4. Menu Section (Magazine-Style Dotted Lists) -->
+        <section id="menu" class="menu-section">
+            <div class="container">
+                <div class="menu-intro text-center" data-reveal>
+                    <span class="section-subtitle">Specially Curated</span>
+                    <h2 class="section-title">Our Signature Brews</h2>
+                    <p class="section-description">
+                        Explore our handcrafted menu, ranging from classic espresso beverages to slow-bar pour overs and velvety cold brews.
+                    </p>
+                </div>
+
+                <div class="menu-grid">
+                    <!-- Item 1: Espresso -->
+                    <div class="menu-card" data-tilt data-reveal tabindex="0">
+                        <!-- Background Image & Readability Overlay -->
+                        <img src="images/espresso.jpg" alt="Espresso" class="menu-card-bg">
+                        <div class="menu-card-overlay"></div>
+                        
+                        <div class="menu-card-inner">
+                            <h3 class="menu-item-title">Espresso</h3>
+                            <p class="menu-item-desc">Pure, bold, and intense. Double shot extraction of our seasonal single-origin espresso blend.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">₹180</span>
+                                <span class="menu-badge">Hot</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Cappuccino -->
+                    <div class="menu-card" data-tilt data-reveal tabindex="0">
+                        <!-- Background Image & Readability Overlay -->
+                        <img src="images/cappuccino.jpg" alt="Cappuccino" class="menu-card-bg">
+                        <div class="menu-card-overlay"></div>
+                        
+                        <div class="menu-card-inner">
+                            <h3 class="menu-item-title">Cappuccino</h3>
+                            <p class="menu-item-desc">Perfect harmony of espresso, steamed milk, and a thick, velvety layer of micro-foam.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">₹240</span>
+                                <span class="menu-badge">Classic</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: Latte -->
+                    <div class="menu-card" data-tilt data-reveal tabindex="0">
+                        <!-- Background Image & Readability Overlay -->
+                        <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=400&q=80" alt="Latte" class="menu-card-bg">
+                        <div class="menu-card-overlay"></div>
+                        
+                        <div class="menu-card-inner">
+                            <h3 class="menu-item-title">Latte</h3>
+                            <p class="menu-item-desc">Rich espresso balanced with a generous amount of steamed milk and a thin layer of foam.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">₹260</span>
+                                <span class="menu-badge">Popular</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4: Flat White -->
+                    <div class="menu-card" data-tilt data-reveal tabindex="0">
+                        <!-- Background Image & Readability Overlay -->
+                        <img src="images/flat-white.jpg" alt="Flat White" class="menu-card-bg">
+                        <div class="menu-card-overlay"></div>
+                        
+                        <div class="menu-card-inner">
+                            <h3 class="menu-item-title">Flat White</h3>
+                            <p class="menu-item-desc">Double ristretto shot with velvety steamed micro-foam, offering a stronger coffee note.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">₹270</span>
+                                <span class="menu-badge">Smooth</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 5: Spanish Latte -->
+                    <div class="menu-card" data-tilt data-reveal tabindex="0">
+                        <!-- Background Image & Readability Overlay -->
+                        <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=400&q=80" alt="Spanish Latte" class="menu-card-bg">
+                        <div class="menu-card-overlay"></div>
+                        
+                        <div class="menu-card-inner">
+                            <h3 class="menu-item-title">Spanish Latte</h3>
+                            <p class="menu-item-desc">A sweet twist. Double espresso with steamed milk and a swirl of sweet condensed milk.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">₹320</span>
+                                <span class="menu-badge">Sweet</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 6: Vanilla Cold Brew -->
+                    <div class="menu-card" data-tilt data-reveal tabindex="0">
+                        <!-- Background Image & Readability Overlay -->
+                        <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=400&q=80" alt="Vanilla Cold Brew" class="menu-card-bg">
+                        <div class="menu-card-overlay"></div>
+                        
+                        <div class="menu-card-inner">
+                            <h3 class="menu-item-title">Vanilla Cold Brew</h3>
+                            <p class="menu-item-desc">Slow-steeped for 18 hours, infused with house-made vanilla bean syrup and served over ice.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">₹340</span>
+                                <span class="menu-badge">Cold</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 7: Nitro Cold Brew -->
+                    <div class="menu-card" data-tilt data-reveal tabindex="0">
+                        <!-- Background Image & Readability Overlay -->
+                        <img src="images/nitro-cold-brew.jpg" alt="Nitro Cold Brew" class="menu-card-bg">
+                        <div class="menu-card-overlay"></div>
+                        
+                        <div class="menu-card-inner">
+                            <h3 class="menu-item-title">Nitro Cold Brew</h3>
+                            <p class="menu-item-desc">Our signature cold brew charged with nitrogen for a rich, creamy head and natural sweetness.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">₹380</span>
+                                <span class="menu-badge">Signature</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 8: Pour Over -->
+                    <div class="menu-card" data-tilt data-reveal tabindex="0">
+                        <!-- Background Image & Readability Overlay -->
+                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=400&q=80" alt="Pour Over" class="menu-card-bg">
+                        <div class="menu-card-overlay"></div>
+                        
+                        <div class="menu-card-inner">
+                            <h3 class="menu-item-title">Pour Over</h3>
+                            <p class="menu-item-desc">Hand-poured slow extraction highlighting the delicate tasting notes of single-origin beans.</p>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">₹350</span>
+                                <span class="menu-badge">Manual</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Divider -->
+        <div class="section-divider-wrap">
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- 5. Gallery Section (Flip Card Hover Effect) -->
+        <section id="gallery" class="gallery-section">
+            <div class="container">
+                <div class="gallery-intro text-center" data-reveal>
+                    <span class="section-subtitle">Inside Our World</span>
+                    <h2 class="section-title">The Aurora Gallery</h2>
+                    <p class="section-description">
+                        A glimpse into the daily craft, cozy atmospheres, and visual stories that bring our café to life.
+                    </p>
+                </div>
+
+                <div class="gallery-grid">
+                    <!-- Gallery Item 1: Interior -->
+                    <div class="gallery-card" data-reveal>
+                        <div class="gallery-card-inner">
+                            <div class="gallery-card-front">
+                                <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=600&q=80" alt="Aurora Brew House Cozy Interior seating areas" class="gallery-img">
+                            </div>
+                            <div class="gallery-card-back">
+                                <div class="gallery-card-back-content">
+                                    <i class="fa-solid fa-chair gallery-icon"></i>
+                                    <h3>Cozy Corners</h3>
+                                    <p>Designed for comfort, conversation, and quiet work sessions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 2: Latte Art -->
+                    <div class="gallery-card" data-reveal>
+                        <div class="gallery-card-inner">
+                            <div class="gallery-card-front">
+                                <img src="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?auto=format&fit=crop&w=600&q=80" alt="Beautiful Latte Art poured on a cappuccino" class="gallery-img">
+                            </div>
+                            <div class="gallery-card-back">
+                                <div class="gallery-card-back-content">
+                                    <i class="fa-solid fa-wand-magic-sparkles gallery-icon"></i>
+                                    <h3>Latte Art</h3>
+                                    <p>Pouring love, precision, and micro-foam aesthetics into every single cup.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 3: Outdoor Seating -->
+                    <div class="gallery-card" data-reveal>
+                        <div class="gallery-card-inner">
+                            <div class="gallery-card-front">
+                                <img src="https://images.unsplash.com/photo-1525610553991-2bede1a236e2?auto=format&fit=crop&w=600&q=80" alt="Outdoor garden seating area under the shade" class="gallery-img">
+                            </div>
+                            <div class="gallery-card-back">
+                                <div class="gallery-card-back-content">
+                                    <i class="fa-solid fa-sun gallery-icon"></i>
+                                    <h3>Alfresco Vibe</h3>
+                                    <p>Enjoy the beautiful Bangalore weather in our lush green outdoor seating area.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 4: Barista Brewing -->
+                    <div class="gallery-card" data-reveal>
+                        <div class="gallery-card-inner">
+                            <div class="gallery-card-front">
+                                <img src="images/barista-brewing.jpg" alt="Barista preparing specialty pour-over coffee" class="gallery-img">
+                            </div>
+                            <div class="gallery-card-back">
+                                <div class="gallery-card-back-content">
+                                    <i class="fa-solid fa-seedling gallery-icon"></i>
+                                    <h3>Master Brewer</h3>
+                                    <p>Crafted by passionate baristas trained in the exact science of extraction.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 5: Pastries -->
+                    <div class="gallery-card" data-reveal>
+                        <div class="gallery-card-inner">
+                            <div class="gallery-card-front">
+                                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" alt="Freshly baked artisanal croissants and pastries" class="gallery-img">
+                            </div>
+                            <div class="gallery-card-back">
+                                <div class="gallery-card-back-content">
+                                    <i class="fa-solid fa-wheat-awn gallery-icon"></i>
+                                    <h3>Artisanal Bakes</h3>
+                                    <p>Freshly baked everyday to pair perfectly with your favourite blend.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 6: Coffee Beans -->
+                    <div class="gallery-card" data-reveal>
+                        <div class="gallery-card-inner">
+                            <div class="gallery-card-front">
+                                <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=600&q=80" alt="Freshly roasted specialty coffee beans close-up" class="gallery-img">
+                            </div>
+                            <div class="gallery-card-back">
+                                <div class="gallery-card-back-content">
+                                    <i class="fa-solid fa-fire gallery-icon"></i>
+                                    <h3>Signature Roasts</h3>
+                                    <p>Sourced ethically and roasted locally to highlight complex origin tasting notes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Divider -->
+        <div class="section-divider-wrap">
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- 6. Location & Hours Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- Contact Details / Info -->
+                    <div class="contact-info" data-reveal>
+                        <span class="section-subtitle">Visit Us</span>
+                        <h2 class="section-title">Hours & Location</h2>
+                        <p class="contact-description">
+                            Drop by to work, unwind, or catch up with friends. We are located in the vibrant hub of Indiranagar.
+                        </p>
+                        
+                        <div class="info-blocks">
+                            <!-- Address Block -->
+                            <div class="info-block">
+                                <div class="info-icon">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div class="info-text">
+                                    <h3>Our Address</h3>
+                                    <p>28 Green Avenue, Indiranagar 100 Feet Road, Bangalore</p>
+                                </div>
+                            </div>
+
+                            <!-- Hours Block -->
+                            <div class="info-block">
+                                <div class="info-icon">
+                                    <i class="fa-solid fa-clock"></i>
+                                </div>
+                                <div class="info-text">
+                                    <h3>Opening Hours</h3>
+                                    <p><strong>Mon – Fri:</strong> 8:00 AM – 10:00 PM</p>
+                                    <p><strong>Sat – Sun:</strong> 7:00 AM – 11:00 PM</p>
+                                </div>
+                            </div>
+
+                            <!-- Phone Block -->
+                            <div class="info-block">
+                                <div class="info-icon">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div class="info-text">
+                                    <h3>Call Us</h3>
+                                    <p><a href="tel:+919876543210" class="contact-link">+91 98765 43210</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Embedded Google Map -->
+                    <div class="contact-map" data-reveal>
+                        <div class="map-wrapper">
+                            <!-- Embedded Map focused on Indiranagar, Bangalore -->
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.9832711090333!2d77.63845037583696!3d12.97290121484218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae13e25b42d547%3A0xa5229adad2488ef9!2s100%20Feet%20Rd%2C%20Indiranagar%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Aurora Brew House location on Google Maps">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 7. Footer Section -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">Aurora Brew House</a>
+                    <p class="footer-tagline">Where Every Cup Tells a Story.</p>
+                </div>
+                
+                <div class="footer-social">
+                    <p>Follow our journey</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/aurorabrewhouse" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Follow us on Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                            <span>@aurorabrewhouse</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Aurora Brew House. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Link External Script -->
+    <script src="script.js"></script>
+</body>
+</html>

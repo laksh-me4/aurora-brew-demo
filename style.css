@@ -1,0 +1,1367 @@
+/* 
+  =========================================
+  Aurora Brew House - Style Sheet
+  =========================================
+  Table of Contents:
+  1. CSS Reset & Base Styles
+  2. CSS Custom Variables (:root)
+  3. Typography
+  4. Global Components (Buttons, Containers, Scrollbar)
+  5. Sticky Navbar Header
+  6. Hero Section (with Parallax & Scroll Indicator)
+  7. About Section
+  8. Menu Section (3D Tilt Cards)
+  9. Gallery Section (3D Flip Cards)
+  10. Location & Hours Section (Map & Hours Grid)
+  11. Footer Section
+  12. Responsive Media Queries
+*/
+
+/* =========================================
+   1. CSS Reset & Base Styles
+   ========================================= */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base size */
+}
+
+body {
+    background-color: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   2. CSS Custom Variables (:root)
+   ========================================= */
+:root {
+    /* Brand Colors */
+    --coffee-brown: #5C4033;
+    --coffee-brown-rgb: 92, 64, 51;
+    --cream: #F7F3ED;
+    --cream-rgb: 247, 243, 237;
+    --forest-green: #5B7F4A;
+    --forest-green-rgb: 91, 127, 74;
+    --charcoal: #2C2C2C;
+    --charcoal-rgb: 44, 44, 44;
+    --golden-amber: #C58B39;
+    --golden-amber-rgb: 197, 139, 57;
+
+    /* Semantic Tones & Accents */
+    --white: #ffffff;
+    --card-bg-light: #ffffff;
+    --card-bg-dark: #4A3329;
+    
+    /* Layout & Shadows */
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-tilt: 0 30px 60px rgba(0, 0, 0, 0.15);
+    
+    /* Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-quick: all 0.2s ease;
+}
+
+/* =========================================
+   3. Typography
+   ========================================= */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--coffee-brown);
+}
+
+p {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+}
+
+.section-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--forest-green);
+    display: block;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.15em;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--coffee-brown);
+    margin-bottom: 2rem;
+    line-height: 1.15;
+    position: relative;
+    display: inline-block;
+}
+
+/* Accent Underline for Section Titles - Removed for Editorial look */
+.section-title::after {
+    display: none;
+}
+
+.text-light.section-title {
+    color: var(--cream);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-center .section-title::after {
+    margin: 10px auto 0 auto;
+}
+
+.section-description {
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+    color: #666;
+    font-size: 1.05rem;
+}
+
+.menu-section .section-description {
+    color: rgba(247, 243, 237, 0.8);
+}
+
+/* =========================================
+   4. Global Components & Utilities
+   ========================================= */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+section {
+    padding: 8.5rem 0; /* Increased spacing for editorial design */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--coffee-brown);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--forest-green);
+}
+
+/* Premium Rounded Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.9rem 2.2rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 30px; /* Highly rounded corners */
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.btn-primary {
+    background-color: var(--golden-amber);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(197, 139, 57, 0.15);
+}
+
+.btn-primary:hover {
+    background-color: var(--coffee-brown);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(92, 64, 51, 0.22);
+}
+
+/* Page Section Dividers */
+.section-divider-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem 0;
+    background-color: var(--cream);
+}
+
+.section-divider {
+    width: 120px;
+    height: 1.5px;
+    background: linear-gradient(to right, transparent, var(--golden-amber), transparent);
+}
+
+/* Scroll-Reveal Animation Triggers */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform, opacity;
+}
+
+[data-reveal].revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   5. Sticky Navbar Header
+   ========================================= */
+.navbar-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: var(--transition-smooth);
+    background-color: transparent;
+    padding: 1.5rem 0;
+}
+
+/* Scrolled Nav Style (Solid Background) */
+.navbar-header.scrolled {
+    background-color: rgba(247, 243, 237, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-md);
+    padding: 0.8rem 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Logo Design */
+.logo {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+    transition: var(--transition-smooth);
+}
+
+.logo-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--golden-amber);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
+    transition: var(--transition-smooth);
+}
+
+/* Scrolled Logo colors */
+.navbar-header.scrolled .logo-text {
+    color: var(--coffee-brown);
+}
+
+/* Navbar Menu Links */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: var(--transition-smooth);
+    position: relative;
+    padding: 0.4rem 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background-color: var(--golden-amber);
+    transition: var(--transition-smooth);
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--white);
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+
+/* Scrolled Nav Link colors */
+.navbar-header.scrolled .nav-link {
+    color: var(--charcoal);
+}
+
+.navbar-header.scrolled .nav-link:hover, 
+.navbar-header.scrolled .nav-link.active {
+    color: var(--coffee-brown);
+}
+
+/* Mobile Toggle Hamburger */
+.mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.mobile-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--white);
+    border-radius: 2px;
+    transition: var(--transition-smooth);
+}
+
+/* Scrolled Mobile Toggle styling */
+.navbar-header.scrolled .mobile-toggle .bar {
+    background-color: var(--coffee-brown);
+}
+
+/* Hamburger Open States */
+.mobile-toggle.open .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.mobile-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-toggle.open .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* =========================================
+   6. Hero Section (Parallax & Overlay)
+   ========================================= */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: var(--white);
+    overflow: hidden;
+    padding: 0;
+}
+
+/* Background Div/Video with Parallax translation */
+.hero-bg, .hero-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%; /* Taller to allow scrolling movement without showing borders */
+    will-change: transform;
+    z-index: 1;
+    object-fit: cover; /* Ensures video scales to cover the viewport */
+}
+
+.hero-bg {
+    background-image: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1920&q=80');
+    background-position: center center;
+    background-size: cover;
+}
+
+/* Tint overlay darkened further to ~68% opacity to read as a backdrop */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.72) 0%,
+        rgba(44, 44, 44, 0.65) 100%
+    );
+    z-index: 2;
+}
+
+/* Hero Content Grid & Containers */
+.hero-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+}
+
+.hero-content {
+    text-align: left;
+    max-width: 650px;
+    z-index: 3;
+}
+
+.hero-title {
+    font-size: 5.5rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 1.2rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
+    animation: fadeInDown 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-style: italic;
+    color: var(--golden-amber);
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.hero-divider {
+    width: 80px;
+    height: 2px;
+    background-color: var(--cream);
+    margin: 0 0 2.5rem 0; /* Left-aligned */
+    opacity: 0.8;
+}
+
+.hero-btn {
+    animation: fadeInUp 1.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* SVG Illustration Container */
+.hero-illustration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    will-change: transform;
+    transition: transform 0.1s ease-out; /* Smooth parallax */
+}
+
+.mug-svg-wrapper {
+    width: 100%;
+    max-width: 420px; /* Scaled up to serve as a prominent centerpiece */
+    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6));
+    animation: floatMug 6s ease-in-out infinite;
+}
+
+/* Floating animation for mug */
+@keyframes floatMug {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-8px) rotate(1.5deg);
+    }
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+/* Steam animation (rising loop) */
+.steam-line {
+    stroke-dasharray: 20;
+    stroke-dashoffset: 20;
+    animation: steamRise 3s infinite linear;
+    transform-origin: bottom center;
+}
+
+.steam-1 {
+    animation-delay: 0.2s;
+}
+.steam-2 {
+    animation-delay: 0.8s;
+}
+.steam-3 {
+    animation-delay: 1.4s;
+}
+
+@keyframes steamRise {
+    0% {
+        stroke-dashoffset: 20;
+        transform: translateY(4px) scaleY(0.8);
+    }
+    50% {
+        transform: translateY(-2px) scaleY(1);
+    }
+    100% {
+        stroke-dashoffset: 0;
+        transform: translateY(-8px) scaleY(0.8);
+    }
+}
+
+/* Scroll indicator mouse icon */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--cream);
+    opacity: 0.8;
+    transition: var(--transition-smooth);
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+    color: var(--golden-amber);
+}
+
+.scroll-indicator .mouse {
+    width: 26px;
+    height: 40px;
+    border: 2px solid currentColor;
+    border-radius: 15px;
+    position: relative;
+}
+
+.scroll-indicator .wheel {
+    width: 4px;
+    height: 8px;
+    background-color: currentColor;
+    border-radius: 2px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollMouse 1.8s infinite;
+}
+
+.scroll-indicator .arrow {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    animation: scrollArrow 1.8s infinite;
+}
+
+/* Animations definitions */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scrollMouse {
+    0% {
+        top: 6px;
+        opacity: 1;
+    }
+    50% {
+        top: 15px;
+        opacity: 0.1;
+    }
+    100% {
+        top: 6px;
+        opacity: 1;
+    }
+}
+
+@keyframes scrollArrow {
+    0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(6px) rotate(45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 0.3;
+    }
+}
+
+/* =========================================
+   7. About Section
+   ========================================= */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+}
+
+.about-text {
+    font-size: 1.05rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-style: italic;
+    color: var(--coffee-brown);
+    border-left: 3px solid var(--golden-amber);
+    padding-left: 1.8rem;
+    margin-top: 2.2rem;
+    line-height: 1.45;
+}
+
+/* Creative image overlapping effect */
+.about-image-container {
+    position: relative;
+    padding: 1.2rem;
+}
+
+.about-image-wrapper {
+    position: relative;
+    border-radius: 8px; /* Sharper, more editorial corners */
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    z-index: 2;
+}
+
+.about-image {
+    width: 100%;
+    display: block;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.about-image-wrapper:hover .about-image {
+    transform: scale(1.03); /* Soft, subtle zoom */
+}
+
+/* Styled Border Behind Image */
+.about-image-border {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--golden-amber); /* Editorial thin gold border */
+    border-radius: 8px;
+    z-index: 1;
+    pointer-events: none;
+    transition: var(--transition-smooth);
+}
+
+.about-image-container:hover .about-image-border {
+    top: 5px;
+    right: 5px;
+}
+
+/* =========================================
+   8. Menu Section (3D Tilt Cards)
+   ========================================= */
+.menu-section {
+    background-color: var(--coffee-brown);
+    background-image: linear-gradient(
+        135deg, 
+        rgba(92, 64, 51, 1) 0%, 
+        rgba(74, 51, 41, 1) 100%
+    );
+    position: relative;
+}
+
+.menu-section .section-title {
+    color: var(--cream);
+}
+
+.menu-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(257, 243, 237, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+}
+
+/* Menu Grid */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+/* Menu Card Styles with 3D setup */
+.menu-card {
+    background-color: var(--card-bg-dark);
+    border-radius: 8px; /* 8px editorial rounded corners */
+    padding: 2.5rem 2rem;
+    box-shadow: var(--shadow-md);
+    transition: box-shadow 0.3s ease, transform 0.1s ease, border-color 0.3s ease, outline 0.2s ease; /* Transformed by JS */
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    position: relative;
+    border: 1px solid rgba(247, 243, 237, 0.08);
+    cursor: default;
+    overflow: hidden; /* Vital to contain the background image */
+    z-index: 1;
+    min-height: 380px; /* Ensure consistent card height */
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-card:hover, .menu-card:focus, .menu-card:focus-within {
+    box-shadow: var(--shadow-tilt);
+    border-color: rgba(197, 139, 57, 0.3);
+}
+
+/* Keyboard Accessibility Focus State (Fix 2): Lift card and apply a clear gold outline */
+.menu-card:focus, .menu-card:focus-within {
+    transform: translateY(-8px) scale(1.04) !important; /* Lifts card when focused without mouse tilt */
+    outline: 2px solid var(--golden-amber);
+    outline-offset: 4px;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-color 0.3s ease, outline 0.2s ease;
+}
+
+/* Background Image on Card */
+.menu-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.menu-card:hover .menu-card-bg, .menu-card:focus .menu-card-bg, .menu-card:focus-within .menu-card-bg {
+    transform: scale(1.1);
+}
+
+/* Readability Overlay Gradient */
+.menu-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(92, 64, 51, 0.45) 0%,
+        rgba(30, 30, 36, 0.95) 100%
+    );
+    z-index: 2;
+    transition: opacity 0.3s ease;
+}
+
+.menu-card:hover .menu-card-overlay, .menu-card:focus .menu-card-overlay, .menu-card:focus-within .menu-card-overlay {
+    background: linear-gradient(
+        to bottom,
+        rgba(92, 64, 51, 0.35) 0%,
+        rgba(30, 30, 36, 0.98) 100%
+    );
+}
+
+/* Inside container to float items in 3D space */
+.menu-card-inner {
+    transform: translateZ(30px); /* Push contents forward */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 3;
+    flex-grow: 1;
+}
+
+.menu-item-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--cream);
+    margin-bottom: 0.8rem;
+}
+
+.menu-item-desc {
+    font-size: 0.92rem;
+    color: rgba(247, 243, 237, 0.7);
+    margin-bottom: 1.8rem;
+    flex-grow: 1;
+    line-height: 1.5;
+}
+
+.menu-item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.menu-item-price {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--golden-amber);
+    font-family: 'Inter', sans-serif;
+}
+
+.menu-badge {
+    background-color: rgba(197, 139, 57, 0.15);
+    color: var(--golden-amber);
+    border: 1px solid rgba(197, 139, 57, 0.3);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* =========================================
+   9. Gallery Section (3D Flip Cards)
+   ========================================= */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+/* Flip Card Container */
+.gallery-card {
+    background-color: transparent;
+    perspective: 1000px;
+    height: 350px;
+    border-radius: 8px;
+    overflow: visible;
+}
+
+/* Inner flipper */
+.gallery-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    box-shadow: var(--shadow-md);
+    border-radius: 8px;
+}
+
+/* Hover flip trigger */
+.gallery-card:hover .gallery-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front & Back Faces */
+.gallery-card-front, .gallery-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Front face (Image) */
+.gallery-card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Back face (Caption details) */
+.gallery-card-back {
+    background-color: var(--coffee-brown);
+    background-image: linear-gradient(
+        145deg, 
+        rgba(92, 64, 51, 0.98) 0%, 
+        rgba(50, 35, 28, 0.98) 100%
+    );
+    color: var(--cream);
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+    border: 2px solid var(--golden-amber);
+}
+
+.gallery-card-back-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.gallery-icon {
+    font-size: 2.2rem;
+    color: var(--golden-amber);
+}
+
+.gallery-card-back h3 {
+    color: var(--cream);
+    font-size: 1.5rem;
+}
+
+.gallery-card-back p {
+    font-size: 0.95rem;
+    color: rgba(247, 243, 237, 0.8);
+    max-width: 250px;
+}
+
+/* =========================================
+   10. Location & Hours Section
+   ========================================= */
+.contact-section {
+    background-color: #f1ebd8; /* Warm tone background */
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.contact-description {
+    font-size: 1.05rem;
+    color: #555;
+    margin-bottom: 2.5rem;
+}
+
+.info-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.info-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.info-icon {
+    background-color: var(--coffee-brown);
+    color: var(--cream);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 10px rgba(92, 64, 51, 0.25);
+}
+
+.info-block:hover .info-icon {
+    background-color: var(--forest-green);
+    transform: scale(1.1);
+}
+
+.info-text h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--coffee-brown);
+    margin-bottom: 0.3rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.info-text p {
+    color: #444;
+    font-size: 0.95rem;
+}
+
+.contact-link {
+    color: var(--coffee-brown);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-quick);
+}
+
+.contact-link:hover {
+    color: var(--golden-amber);
+}
+
+/* Embedded Google Maps styling */
+.contact-map {
+    height: 450px;
+    width: 100%;
+}
+
+.map-wrapper {
+    height: 100%;
+    width: 100%;
+    border-radius: 8px; /* Clean, editorial rounded corner */
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(92, 64, 51, 0.15);
+}
+
+/* =========================================
+   11. Footer Section
+   ========================================= */
+.site-footer {
+    background-color: var(--charcoal);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 5rem 0 2rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 3rem;
+    margin-bottom: 2.5rem;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--cream);
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--golden-amber);
+}
+
+.footer-social {
+    text-align: right;
+}
+
+.footer-social p {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.social-links {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 0.7rem 1.4rem;
+    border-radius: 30px;
+    color: var(--cream);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition-smooth);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-link i {
+    font-size: 1.3rem;
+    color: var(--golden-amber);
+    transition: var(--transition-quick);
+}
+
+.social-link:hover {
+    background-color: var(--golden-amber);
+    color: var(--white);
+    border-color: var(--golden-amber);
+}
+
+.social-link:hover i {
+    color: var(--white);
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* =========================================
+   12. Responsive Media Queries
+   ========================================= */
+
+/* Desktop / Big Screens (up to 1200px) */
+@media (max-width: 1200px) {
+    .menu-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Medium Tablets & Laptops (1024px and down) */
+@media (max-width: 1024px) {
+    section {
+        padding: 6.5rem 0;
+    }
+
+    .hero-title {
+        font-size: 4.2rem;
+    }
+
+    .hero-tagline {
+        font-size: 1.8rem;
+    }
+
+    .about-grid {
+        gap: 3rem;
+    }
+
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .gallery-card {
+        height: 300px;
+    }
+
+    .contact-grid {
+        gap: 2.5rem;
+    }
+    
+    .contact-map {
+        height: 400px;
+    }
+}
+
+/* Small Tablets & Mobile Devices (768px and down) */
+@media (max-width: 768px) {
+    /* Navbar Hamburger Menu Transformation */
+    .mobile-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 75%;
+        max-width: 320px;
+        height: 100vh;
+        background-color: var(--coffee-brown);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+        transition: var(--transition-smooth);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+        z-index: 999;
+    }
+
+    .nav-links.open {
+        right: 0;
+    }
+
+    .nav-link {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.85);
+    }
+    
+    .nav-link:hover, .nav-link.active {
+        color: var(--golden-amber);
+    }
+
+    /* Scrolled Menu links when hamburger is active on mobile */
+    .navbar-header.scrolled .nav-link {
+        color: rgba(255, 255, 255, 0.85);
+    }
+    
+    .navbar-header.scrolled .nav-link:hover {
+        color: var(--golden-amber);
+    }
+
+    /* Mobile hamburger text styling overlay */
+    .mobile-toggle.open .bar {
+        background-color: var(--white) !important;
+    }
+
+    /* Hero Section Mobile Grid Styles */
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+        padding-top: 4rem; /* Safe spacing under header */
+    }
+    
+    .hero-content {
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    .hero-divider {
+        margin: 0 auto 2.5rem auto;
+    }
+
+    .mug-svg-wrapper {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    /* Grid Layouts Stacked vertically */
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+    }
+
+
+
+    .about-image-container {
+        order: -1; /* Image first on mobile */
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+    }
+
+    .contact-map {
+        height: 350px;
+    }
+
+    .footer-grid {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .footer-social {
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
+
+/* Portrait Phones (375px and down) */
+@media (max-width: 480px) {
+    html {
+        font-size: 15px; /* Downscale text slightly for small viewports */
+    }
+
+    section {
+        padding: 4.5rem 0;
+    }
+
+    .hero-title {
+        font-size: 3.4rem;
+    }
+
+    .hero-tagline {
+        font-size: 1.6rem;
+        margin-bottom: 1.8rem;
+    }
+
+    .mug-svg-wrapper {
+        max-width: 250px;
+    }
+
+    .hero-divider {
+        margin-bottom: 2rem;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-card {
+        height: 280px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
